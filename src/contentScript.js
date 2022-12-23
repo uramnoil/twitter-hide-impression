@@ -14,7 +14,7 @@ const onLoaded = () => {
       clearInterval(intervalId);
       hideAnalytics()
 
-      const target = document.getElementsByTagName('main')[0];
+      const target = document.getElementsByTagName('section')[0];
       //オブザーバーの作成
       const observer = new MutationObserver(hideAnalytics);
       const config = {attributes: true, childList: true, subtree: true};
