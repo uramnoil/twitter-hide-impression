@@ -1,43 +1,28 @@
 'use strict';
 
-// Content script file will run in the context of web page.
-// With content script you can manipulate the web pages using
-// Document Object Model (DOM).
-// You can also pass information to the parent extension.
+const hideAnalytics = () => {
+  var analyticses = document.querySelectorAll("a[href$='/analytics']");
+  analyticses.forEach(analytics => analytics.innerHTML = "");
+}
 
-// We execute this script by making an entry in manifest.json file
-// under `content_scripts` property
+const onLoaded = () => {
+  const jsInitCheckTimer = setInterval(jsLoaded, 1000);
+  function jsLoaded() {
+    if (document.querySelector("main") != null) {
+      // ^="/[a-zA-Z0-9-_]+/status/[0-9]+/analytics
+      clearInterval(jsInitCheckTimer);
 
-// For more information on Content Scripts,
-// See https://developer.chrome.com/extensions/content_scripts
-
-// Log `title` of current active web page
-const pageTitle = document.head.getElementsByTagName('title')[0].innerHTML;
-console.log(
-  `Page title is: '${pageTitle}' - evaluated by Chrome extension's 'contentScript.js' file`
-);
-
-// Communicate with background file by sending a message
-chrome.runtime.sendMessage(
-  {
-    type: 'GREETINGS',
-    payload: {
-      message: 'Hello, my name is Con. I am from ContentScript.',
-    },
-  },
-  (response) => {
-    console.log(response.message);
+      const target = document.getElementsByTagName('main')[0];
+      //オブザーバーの作成
+      var observer = new MutationObserver(hideAnalytics);
+      const config = {attributes: true, childList: true, subtree: true};
+      //監視の開始
+      observer.observe(target, config);
+      hideAnalytics()
+    } else {
+      console.log("waiting...")
+    }
   }
-);
+} 
 
-// Listen for message
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'COUNT') {
-    console.log(`Current count is ${request.payload.count}`);
-  }
-
-  // Send an empty response
-  // See https://github.com/mozilla/webextension-polyfill/issues/130#issuecomment-531531890
-  sendResponse({});
-  return true;
-});
+window.addEventListener('load', onLoaded, false); 
