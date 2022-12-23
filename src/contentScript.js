@@ -3,7 +3,7 @@
 // インプレッションを非表示にする
 const hideAnalytics = () => {
   var analyticses = document.querySelectorAll("a[href$='/analytics']");
-  analyticses.forEach(analytics => analytics.innerHTML = "");
+  analyticses.forEach(analytics => analytics.remove());
 }
 
 // ロード完了時のイベントハンドラ
