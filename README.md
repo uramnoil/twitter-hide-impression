@@ -1,15 +1,15 @@
-# <img src="public/icons/icon_48.png" width="45" align="left"> Twitter Hide Impression
-
-My Chrome Extension
+# <img src="public/icons/icon_128.png" width="45" align="left"> Twitter Hide Impression
 
 ## Features
 
-- Feature 1
-- Feature 2
+- Twitterのインプレッションを非表示にします。
 
 ## Install
 
-[**Chrome** extension]() <!-- TODO: Add chrome extension link inside parenthesis -->
+1. [拡張機能](edge://extensions/)にアクセス
+1.  Chrome拡張のデベロッパーモードを有効にする
+1. [https://github.com/uramnoil/twitter-hide-impression/releases/latest](最新リリース)からbuild.zipをダウンロード
+1. build.zipを展開し、フォルダの中のbuildフォルダを拡張機能から読み込む
 
 ## Contribution
 
