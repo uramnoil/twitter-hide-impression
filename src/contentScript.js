@@ -1,15 +1,19 @@
 'use strict';
 
+// インプレッションを非表示にする
 const hideAnalytics = () => {
   var analyticses = document.querySelectorAll("a[href$='/analytics']");
   analyticses.forEach(analytics => analytics.innerHTML = "");
 }
 
+// ロード完了時のイベントハンドラ
 const onLoaded = () => {
+  // 
   const jsInitCheckTimer = setInterval(jsLoaded, 1000);
+  // コンテンツのロード完了時のイベントハンドラ
   function jsLoaded() {
+    // mainタグがロードされたらintervalを終了する
     if (document.querySelector("main") != null) {
-      // ^="/[a-zA-Z0-9-_]+/status/[0-9]+/analytics
       clearInterval(jsInitCheckTimer);
 
       const target = document.getElementsByTagName('main')[0];
