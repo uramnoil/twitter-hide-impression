@@ -4,7 +4,7 @@
 const hideAnalytics = () => {
   // TODO: インプレッションの子孫要素を削除しており表示が崩れているので、一番外側のタグ自体を消したい
   const analyticses = document.querySelectorAll("a[href$='/analytics']");
-  analyticses.forEach(analytics => analytics.remove());
+  analyticses.forEach(analytics => analytics.parentNode?.remove());
 }
 
 // ロード完了時のイベントハンドラ
